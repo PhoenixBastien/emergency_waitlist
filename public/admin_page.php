@@ -12,7 +12,7 @@ if (!isset($_SESSION['loggedin'])) {
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Home Page</title>
+		<title>Admin Page</title>
 		<link rel="stylesheet" href="assets/style.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	</head>
@@ -25,14 +25,14 @@ if (!isset($_SESSION['loggedin'])) {
 			</div>
 		</nav>
 		<div class="content">
-			<h2>Home Page</h2>
+			<h2>Admin Page</h2>
             <div>
 			<p>Welcome, <?=$_SESSION['name']?>!</p>
             <p>
                 <?php
                 date_default_timezone_set('Canada/Eastern');
-                $time = date('Y-m-d H:i:s', time());
-                echo "Current time: " . $time;
+                $current_time = date('Y-m-d H:i:s', time());
+                echo "Current time: " . $current_time;
                 ?>
             </p>
             <?php
@@ -52,7 +52,8 @@ if (!isset($_SESSION['loggedin'])) {
             // Convert $result to array
             $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-            echo "<p>The list of patients is below:</p>
+            echo "<p>The list of patients is below:</p>";
+            echo "
             <table>
                 <tr>
                     <th>Position</th>
@@ -82,15 +83,21 @@ if (!isset($_SESSION['loggedin'])) {
                 $row["appt_time"] = $appt_time->format('Y-m-d H:i:s');
                 $row["position"] = $position++;
 
-                echo "<tr>";
-                printf("<td>%s</td>", $row["position"]);
-                printf("<td>%s</td>", $row["user_id"]);
-                printf("<td>%s</td>", $row["username"]);
-                printf("<td>%s</td>", $row["email"]);
-                printf("<td>%s</td>", $row["arrival_time"]);
-                printf("<td>%s</td>", $row["severity"]);
-                printf("<td>%s</td>", $row["appt_time"]);
-                echo "</tr>";
+                // Skip if appointment time is past
+                if ((new DateTime($current_time)) >= $appt_time) {
+                    continue;
+                }
+
+                echo "
+                <tr>
+                    <td>{$row["position"]}</td>
+                    <td>{$row["user_id"]}</td>
+                    <td>{$row["username"]}</td>
+                    <td>{$row["email"]}</td>
+                    <td>{$row["arrival_time"]}</td>
+                    <td>{$row["severity"]}</td>
+                    <td>{$row["appt_time"]}</td>
+                </tr>";
             }
 
             echo "</table>";
