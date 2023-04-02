@@ -30,7 +30,7 @@ if ($stmt = $mysqli->prepare('SELECT user_id, user_password, user_role FROM user
         $stmt->fetch();
         // Account exists, now we verify the password.
         // Note: remember to use password_hash in your registration file to store the hashed passwords.
-        if ($_POST['password'] === $password) {
+        if ($_POST['password'] === $password && $_POST['role'] === $role) {
             // Verification success! User has logged-in!
             // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
             session_regenerate_id();
@@ -38,19 +38,14 @@ if ($stmt = $mysqli->prepare('SELECT user_id, user_password, user_role FROM user
             $_SESSION['name'] = $_POST['username'];
             $_SESSION['id'] = $id;
             $_SESSION['role'] = $role;
-            if ($role === 'admin') {
-                header('Location: home.php');
-            } else {
-                // TODO
-                header('Location: home.php');
-            }
+            header("Location: {$role}_page.php");
         } else {
             // Incorrect password
-            echo 'Incorrect username and/or password!';
+            echo 'Incorrect username, password or role!';
         }
     } else {
         // Incorrect username
-        echo 'Incorrect username and/or password!';
+        echo 'Incorrect username, password or role!';
     }
 
 	$stmt->close();
