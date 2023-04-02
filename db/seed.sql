@@ -1,4 +1,4 @@
-USE phplogin;
+USE emergency_waitlist;
 
 INSERT INTO user (user_id, username, user_password, email, user_role) VALUES (DEFAULT, 'test', 'test', 'test@test.com', 'admin');
 INSERT INTO user (user_id, username, user_password, email, user_role, arrival_time, severity) VALUES (DEFAULT, 'joe', 'joe', 'joe@patient.com', 'patient', TIMESTAMP'2023-04-02 18:00:00', 5);

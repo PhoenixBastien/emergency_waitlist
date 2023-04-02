@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin'])) {
 $host = 'localhost';
 $username = 'root';
 $password = 'password';
-$dbname = 'phplogin';
+$dbname = 'emergency_waitlist';
 $port = '3306';
 $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
 if (mysqli_connect_errno()) {

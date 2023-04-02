@@ -1,7 +1,7 @@
-DROP SCHEMA IF EXISTS phplogin;
-CREATE SCHEMA phplogin;
+DROP SCHEMA IF EXISTS emergency_waitlist;
+CREATE SCHEMA emergency_waitlist;
 
-USE phplogin;
+USE emergency_waitlist;
 
 CREATE TABLE user (
 	user_id SERIAL NOT NULL,
