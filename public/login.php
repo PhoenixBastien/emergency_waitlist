@@ -4,7 +4,7 @@ session_start();
 $host = 'localhost';
 $username = 'root';
 $password = 'password';
-$dbname = 'phplogin';
+$dbname = 'emergency_waitlist';
 $port = '3306';
 // Try and connect using the info above.
 $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
