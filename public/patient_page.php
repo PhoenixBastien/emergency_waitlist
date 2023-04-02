@@ -12,7 +12,7 @@ if (!isset($_SESSION['loggedin'])) {
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Home Page</title>
+		<title>Patient Page</title>
 		<link rel="stylesheet" href="assets/style.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	</head>
@@ -25,14 +25,14 @@ if (!isset($_SESSION['loggedin'])) {
 			</div>
 		</nav>
 		<div class="content">
-			<h2>Home Page</h2>
+			<h2>Patient Page</h2>
             <div>
 			<p>Welcome, <?=$_SESSION['name']?>!</p>
             <p>
                 <?php
                 date_default_timezone_set('Canada/Eastern');
-                $time = date('Y-m-d H:i:s', time());
-                echo "Current time: " . $time;
+                $current_time = date('Y-m-d H:i:s', time());
+                echo "Current time: " . $current_time;
                 ?>
             </p>
             <?php
@@ -65,9 +65,17 @@ if (!isset($_SESSION['loggedin'])) {
                     $appt_time->add(new DateInterval('PT1H'));
                 }
                 // Set patient's appointment time
-                $appts[$appt_time->format('Y-m-d H:i:s')] = $row["user_id"];
+                $appts[$appt_time->format('Y-m-d H:i:s')] = $row["username"];
                 $row["appt_time"] = $appt_time->format('Y-m-d H:i:s');
                 $row["position"] = $position++;
+            }
+
+            if ((new DateTime($current_time)) >= (new DateTime(array_search($_SESSION['name'], $appts)))) {
+                echo "<p>No upcoming appointment</p>";
+            } else {
+                $wait_time = (new DateTime($current_time))->diff(new DateTime(array_search($_SESSION['name'], $appts)));
+                echo "<p>Your appointment time: " . array_search($_SESSION['name'], $appts) . "</p>";
+                echo "<p>Your approximate wait time: {$wait_time->days} day(s) {$wait_time->h} hour(s) {$wait_time->i} minute(s)</p>";
             }
             ?>
             </div>
