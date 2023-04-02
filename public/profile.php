@@ -30,7 +30,7 @@ $stmt->close();
 	<head>
 		<meta charset="utf-8">
 		<title>Profile Page</title>
-		<link href="assets/style.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="assets/style.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	</head>
 	<body class="loggedin">
