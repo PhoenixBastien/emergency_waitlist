@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin'])) {
 	<head>
 		<meta charset="utf-8">
 		<title>Home Page</title>
-		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="assets/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	</head>
 	<body class="loggedin">
