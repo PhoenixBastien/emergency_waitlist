@@ -1,3 +1,9 @@
+:root {
+    --main: #F0EDCC;
+    --accent: #02343F;
+    --main-light: #FAFAF0;
+    --accent-light: #057B95;
+}
 * {
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
@@ -6,20 +12,21 @@
     -moz-osx-font-smoothing: grayscale;
 }
 body {
-    background-color: #435165;
+    background-color: var(--main);
+    background-image: url(noise.png);
 }
 .login {
     width: 400px;
-    background-color: white;
+    background-color: var(--main-light);
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 100px auto;
 }
 .login h1 {
     text-align: center;
-    color: #5b6574;
+    color: var(--accent);
     font-size: 24px;
     padding: 20px 0 20px 0;
-    border-bottom: 1px solid #dee0e4;
+    border-bottom: 1px solid var(--accent);
 }
 .login form {
     display: flex;
@@ -33,33 +40,38 @@ body {
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: #3274d6;
-    color: white;
+    background-color: var(--accent);
+    color: var(--main-light);
 }
 .login form input[type="password"], .login form input[type="text"] {
     width: 310px;
     height: 50px;
-    border: 1px solid #dee0e4;
+    border: 1px solid var(--accent);
+    background-color: var(--main-light);
     margin-bottom: 20px;
     padding: 0 15px;
+}
+.login form select {
+    border: 1px solid var(--accent);
+    background-color: var(--main-light);
 }
 .login form input[type="submit"] {
     width: 100%;
     padding: 15px;
-   margin-top: 20px;
-    background-color: #3274d6;
+    margin-top: 20px;
+    background-color: var(--accent);
     border: 0;
     cursor: pointer;
     font-weight: bold;
-    color: white;
+    color: var(--main-light);
     transition: background-color 0.2s;
 }
 .login form input[type="submit"]:hover {
-  background-color: #2868c7;
+  background-color: var(--accent-light);
     transition: background-color 0.2s;
 }
 .navtop {
-	background-color: #2f3947;
+	background-color: var(--accent);
 	height: 60px;
 	width: 100%;
 	border: 0;
@@ -79,24 +91,20 @@ body {
 	font-size: 24px;
 	padding: 0;
 	margin: 0;
-	color: #eaebed;
+	color: var(--main);
 	font-weight: normal;
 }
 .navtop div a {
 	padding: 0 20px;
 	text-decoration: none;
-	color: #c1c4c8;
+	color: var(--main);
 	font-weight: bold;
 }
 .navtop div a i {
 	padding: 2px 8px 0 0;
 }
 .navtop div a:hover {
-	color: #eaebed;
-}
-body.loggedin {
-	background-color: #f3f4f7;
-    background-image: url(noise.png);
+	color: var(--main-light);
 }
 .content {
 	width: 1000px;
@@ -106,39 +114,34 @@ body.loggedin {
 	margin: 0;
 	padding: 25px 0;
 	font-size: 22px;
-	border-bottom: 1px solid #e0e0e3;
-	color: #4a536e;
+	border-bottom: 1px solid var(--accent);
+	color: var(--accent);
 }
 .content > p, .content > div {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 	margin: 25px 0;
 	padding: 25px;
-	background-color: #fff;
+	background-color: var(--main-light);
 }
 .content > p table td, .content > div table td {
 	padding: 10px;
 }
-/* .content > p table td:first-child, .content > div table td:first-child {
-	font-weight: bold;
-	color: #4a536e;
-	padding-right: 15px;
-} */
 .content > div p {
 	padding: 5px;
 	margin: 0 0 10px 0;
 }
-.content > p table th, .content > div table th {
-    color: #4a536e;
+.content > p table tbody th, .content > div table tbody th {
+    color: var(--accent);
     padding: 10px;
 }
-tbody tr:nth-child(odd) {
-    background-color: #e0e0e3;
+.content tbody tr:nth-child(odd) {
+    background-color: var(--main);
 }
-tbody tr:nth-child(even) {
-    background-color: #fff;
+.content tbody tr:nth-child(even) {
+    background-color: var(--main-light);
 }
 .content > div table {
-    background-color: #435165;
+    background-color: var(--accent);
 }
 ul {
     list-style: none;
@@ -148,12 +151,6 @@ ul {
 li {
     padding-left: 1em;
 }
-/* ul li:before {    
-    font-family: 'FontAwesome';
-    content: '\f067';
-    color: navy;
-    padding-right: 5px;
-} */
 .content strong {
-    color: #4a536e;
+    color: var(--accent);
 }
