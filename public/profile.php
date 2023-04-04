@@ -6,11 +6,8 @@ if (!isset($_SESSION['loggedin'])) {
     header('Location: index.html');
     exit;
 }
-$host = 'localhost';
-$username = 'root';
-$password = 'password';
-$dbname = 'emergency_waitlist';
-$port = '3306';
+// Import connection info
+require 'global.php';
 $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
 if (mysqli_connect_errno()) {
     exit('Failed to connect to MySQL: ' . mysqli_connect_error());

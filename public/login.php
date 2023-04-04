@@ -1,11 +1,7 @@
 <?php
 session_start();
-// Change this to your connection info.
-$host = 'localhost';
-$username = 'root';
-$password = 'password';
-$dbname = 'emergency_waitlist';
-$port = '3306';
+// Import connection info
+require 'global.php';
 // Try and connect using the info above.
 $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
 if (mysqli_connect_errno()) {
