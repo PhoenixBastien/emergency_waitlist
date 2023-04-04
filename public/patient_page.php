@@ -1,5 +1,5 @@
 <?php
-// We need to use sessions, so you should always start sessions using the below code.
+// Start session
 session_start();
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
@@ -30,6 +30,7 @@ if (!isset($_SESSION['loggedin'])) {
                 <p>Welcome, <?=$_SESSION['name']?>!</p>
                 <p>
                     <?php
+                    // Display current time
                     date_default_timezone_set('Canada/Eastern');
                     $current_time = date('Y-m-d H:i:s', time());
                     echo "Current time: {$current_time}";
@@ -46,7 +47,7 @@ if (!isset($_SESSION['loggedin'])) {
                 $result = mysqli_query($mysqli, $query);
                 // Convert $result to array
                 $rows = $result->fetch_all(MYSQLI_ASSOC);
-                
+                // Iterate user row
                 foreach ($rows as $row) {
                     // Desired time is arrival time
                     $appt_time = new DateTime($row["arrival_time"]);
@@ -64,7 +65,7 @@ if (!isset($_SESSION['loggedin'])) {
                 $query = "SELECT appt_time FROM appt WHERE user_id = {$_SESSION['id']}";
                 $result = mysqli_query($mysqli, $query);
                 $appt_time = $result->fetch_object()->appt_time;
-
+                // Display patient's appt info
                 if ((new DateTime($current_time)) >= (new DateTime($appt_time))) {
                     echo "<p>No upcoming appointment</p>";
                 } else {

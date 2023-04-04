@@ -1,4 +1,5 @@
 <?php
+// Start session
 session_start();
 // Import connection info
 require 'global.php';
@@ -34,6 +35,7 @@ if ($stmt = $mysqli->prepare('SELECT user_id, user_password, user_role FROM user
             $_SESSION['name'] = $_POST['username'];
             $_SESSION['id'] = $id;
             $_SESSION['role'] = $role;
+            // Redirect to page based on role
             header("Location: {$role}_page.php");
         } else {
             // Incorrect password
