@@ -32,7 +32,7 @@ if (!isset($_SESSION['loggedin'])) {
                     <?php
                     date_default_timezone_set('Canada/Eastern');
                     $current_time = date('Y-m-d H:i:s', time());
-                    echo "Current time: " . $current_time;
+                    echo "Current time: {$current_time}";
                     ?>
                 </p>
                 <?php
@@ -45,7 +45,6 @@ if (!isset($_SESSION['loggedin'])) {
                 // Try and connect using the info above.
                 $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
                 // Select patients from user table
-                // AND arrival_time < CAST(current_time() AS TIME)
                 $query = "SELECT * FROM user WHERE user_role = 'patient' ORDER BY arrival_time ASC, severity DESC";
                 // Execute above query
                 $result = mysqli_query($mysqli, $query);
@@ -65,8 +64,6 @@ if (!isset($_SESSION['loggedin'])) {
                         <th>Appointment Time</th>
                     </tr>";
 
-                // Array with appointments
-                $appts = array();
                 // Patient's position in queue
                 $position = 1;
                 
@@ -78,10 +75,9 @@ if (!isset($_SESSION['loggedin'])) {
                         // Increment by 1 hour if taken
                         $appt_time->add(new DateInterval('PT1H'));
                     }
-                    // Set patient's appointment time
-                    $appts[$appt_time->format('Y-m-d H:i:s')] = $row["user_id"];
-                    $row["appt_time"] = $appt_time->format('Y-m-d H:i:s');
-                    $row["position"] = $position++;
+
+                    $query = "INSERT INTO appt (user_id, appt_time) VALUES ({$row['user_id']}, TIMESTAMP'{$appt_time->format('Y-m-d H:i:s')}')";
+                    mysqli_execute_query($mysqli, $query);
 
                     // Skip if appointment time is past
                     if ((new DateTime($current_time)) >= $appt_time) {
@@ -90,14 +86,16 @@ if (!isset($_SESSION['loggedin'])) {
 
                     echo "
                     <tr>
-                        <td>{$row["position"]}</td>
+                        <td>{$position}</td>
                         <td>{$row["user_id"]}</td>
                         <td>{$row["username"]}</td>
                         <td>{$row["email"]}</td>
                         <td>{$row["arrival_time"]}</td>
                         <td>{$row["severity"]}</td>
-                        <td>{$row["appt_time"]}</td>
+                        <td>{$appt_time->format('Y-m-d H:i:s')}</td>
                     </tr>";
+
+                    $position++;
                 }
 
                 echo "</table>";

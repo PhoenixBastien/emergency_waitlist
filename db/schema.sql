@@ -13,3 +13,8 @@ CREATE TABLE user (
 	severity INT,
     PRIMARY KEY (user_id)
 );
+
+CREATE TABLE appt (
+	user_id INT REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	appt_time TIMESTAMP
+);

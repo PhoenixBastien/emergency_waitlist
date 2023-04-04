@@ -32,7 +32,7 @@ if (!isset($_SESSION['loggedin'])) {
                     <?php
                     date_default_timezone_set('Canada/Eastern');
                     $current_time = date('Y-m-d H:i:s', time());
-                    echo "Current time: " . $current_time;
+                    echo "Current time: {$current_time}";
                     ?>
                 </p>
                 <?php
@@ -45,36 +45,35 @@ if (!isset($_SESSION['loggedin'])) {
                 // Try and connect using the info above.
                 $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
                 // Select patients from user table
-                // AND arrival_time < CAST(current_time() AS TIME)
                 $query = "SELECT * FROM user WHERE user_role = 'patient' ORDER BY arrival_time ASC, severity DESC";
                 // Execute above query
                 $result = mysqli_query($mysqli, $query);
                 // Convert $result to array
                 $rows = $result->fetch_all(MYSQLI_ASSOC);
-                // Array with appointments
-                $appts = array();
-                // Patient's position in queue
-                $position = 1;
                 
                 foreach ($rows as $row) {
                     // Desired time is arrival time
                     $appt_time = new DateTime($row["arrival_time"]);
                     // Check if time is taken
-                    while (isset($appts[$appt_time->format('Y-m-d H:i:s')])) {
+                    $query = "SELECT user_id FROM appt WHERE appt_time = '{$appt_time->format('Y-m-d H:i:s')}'";
+                    while (mysqli_query($mysqli, $query)->num_rows === 0) {
                         // Increment by 1 hour if taken
                         $appt_time->add(new DateInterval('PT1H'));
                     }
-                    // Set patient's appointment time
-                    $appts[$appt_time->format('Y-m-d H:i:s')] = $row["username"];
-                    $row["appt_time"] = $appt_time->format('Y-m-d H:i:s');
-                    $row["position"] = $position++;
+                    // Add appointment to appt table
+                    $query = "INSERT INTO appt (user_id, appt_time) VALUES ({$row['user_id']}, TIMESTAMP'{$appt_time->format('Y-m-d H:i:s')}')";
+                    mysqli_execute_query($mysqli, $query);
                 }
+                // Get appt of current user
+                $query = "SELECT appt_time FROM appt WHERE user_id = {$_SESSION['id']}";
+                $result = mysqli_query($mysqli, $query);
+                $appt_time = $result->fetch_object()->appt_time;
 
-                if ((new DateTime($current_time)) >= (new DateTime(array_search($_SESSION['name'], $appts)))) {
+                if ((new DateTime($current_time)) >= (new DateTime($appt_time))) {
                     echo "<p>No upcoming appointment</p>";
                 } else {
-                    $wait_time = (new DateTime($current_time))->diff(new DateTime(array_search($_SESSION['name'], $appts)));
-                    echo "<p>Your appointment time: " . array_search($_SESSION['name'], $appts) . "</p>";
+                    $wait_time = (new DateTime($current_time))->diff(new DateTime($appt_time));
+                    echo "<p>Your appointment time: {$appt_time}</p>";
                     echo "<p>Your approximate wait time: {$wait_time->days} day(s) {$wait_time->h} hour(s) {$wait_time->i} minute(s)</p>";
                 }
                 ?>
