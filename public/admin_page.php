@@ -1,7 +1,7 @@
 <?php
 // Start session
 session_start();
-// If the user is not logged in redirect to the login page...
+// If the user is not logged in redirect to the login page
 if (!isset($_SESSION['loggedin'])) {
     header('Location: index.html');
     exit;
@@ -50,7 +50,7 @@ if (!isset($_SESSION['loggedin'])) {
                     <?php
                     // Import connection info
                     require 'global.php';
-                    // Try and connect using the info above.
+                    // Try and connect
                     $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
                     // Select patients from user table
                     $query = "SELECT * FROM user WHERE user_role = 'patient' ORDER BY arrival_time ASC, severity DESC";
@@ -77,7 +77,7 @@ if (!isset($_SESSION['loggedin'])) {
                         if ((new DateTime($current_time)) >= $appt_time) {
                             continue;
                         }
-                        // Display patient and appt info
+                        // Display patient and appointment info
                         echo "
                         <tr>
                             <td>{$position}</td>

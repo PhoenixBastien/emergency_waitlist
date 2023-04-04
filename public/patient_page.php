@@ -39,7 +39,7 @@ if (!isset($_SESSION['loggedin'])) {
                 <?php
                 // Import connection info
                 require 'global.php';
-                // Try and connect using the info above.
+                // Try and connect
                 $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
                 // Select patients from user table
                 $query = "SELECT * FROM user WHERE user_role = 'patient' ORDER BY arrival_time ASC, severity DESC";
@@ -61,11 +61,11 @@ if (!isset($_SESSION['loggedin'])) {
                     $query = "INSERT INTO appt (user_id, appt_time) VALUES ({$row['user_id']}, TIMESTAMP'{$appt_time->format('Y-m-d H:i:s')}')";
                     mysqli_execute_query($mysqli, $query);
                 }
-                // Get appt of current user
+                // Get appointment of current user
                 $query = "SELECT appt_time FROM appt WHERE user_id = {$_SESSION['id']}";
                 $result = mysqli_query($mysqli, $query);
                 $appt_time = $result->fetch_object()->appt_time;
-                // Display patient's appt info
+                // Display patient's appointment info
                 if ((new DateTime($current_time)) >= (new DateTime($appt_time))) {
                     echo "<p>No upcoming appointment</p>";
                 } else {
