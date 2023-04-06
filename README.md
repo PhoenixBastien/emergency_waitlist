@@ -2,13 +2,23 @@
 
 ## Comment utiliser
 
-Modifiez les informations de connexion à MySQL dans le fichier [global.php](public/global.php). 
+### Connexion à la base de données MySQL
 
-Dans votre terminal, à partir du répertoire racine du projet, tapez `cd db`, tapez `mysql -u root -p`, entrez votre mot de passe, tapez `source ./schema.sql` et tapez `source ./seed.sql`.
+Remplacez les identifiants de connexion MySQL dans le fichier [global.php](public/global.php).
 
-Encore une fois dans votre terminal, à partir du répertoire racine du projet, tapez `cd public` et `tapez php -S localhost:3306`.
+Dans votre terminal, à partir du répertoire racine du projet, tapez `cd db` tapez `mysql -u root -p` et entrez votre mot de passe pour vous connecter à MySQL.
+
+Tapez `source ./schema.sql` et tapez `source ./seed.sql` pour créer la base de données.
+
+### Lancement du serveur PHP
+
+Dans votre terminal, à partir du répertoire racine du projet, tapez `cd public` et `tapez php -S localhost:3306` pour lancer le serveur PHP.
+
+### Lancement de l'application
 
 Dans votre navigateur, tapez `localhost:3306` dans la barre de recherche.
+
+### Informations de connexion
 
 Référez-vous au fichier [seed.sql](db/seed.sql) ou au tableau ci-dessous pour vous connecter en tant qu'administrateur ou patient.
 
