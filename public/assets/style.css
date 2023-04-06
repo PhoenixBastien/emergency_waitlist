@@ -154,3 +154,42 @@ li {
 .content strong {
     color: var(--accent);
 }
+.content form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+.content form {
+    justify-content: center;
+    padding-top: 20px;
+    padding-left: 40px;
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+}
+.content form input[type="password"], .content form input[type="text"],
+.content form input[type="email"], .content form input[type="number"],
+.content form input[type="datetime-local"] {
+    width: 310px;
+    height: 50px;
+    border: 1px solid var(--accent);
+    background-color: var(--main-light);
+    margin-bottom: 5px;
+    padding: 0 15px;
+}
+.content form input[type="submit"] {
+    width: 310px;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: var(--accent);
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--main-light);
+    transition: background-color 0.2s;
+}
+.content form input[type="submit"]:hover {
+    background-color: var(--accent-light);
+    transition: background-color 0.2s;
+}
