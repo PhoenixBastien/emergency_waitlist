@@ -11,10 +11,4 @@
 |user_role|varchar(7)|NO| |NULL| |
 |arrival_time|timestamp|YES| |NULL| |
 |severity|int|YES| |NULL| |
-
-## appt table
-
-|Field|Type|Null|Key|Default|Extra|
-|:----|:----|:----|:----|:----|:----|
-|user_id|int|YES| |NULL| |
-|appt_time|timestamp|YES| |NULL| |
+|appt_time|timestamp|YES|UNI|NULL| |
