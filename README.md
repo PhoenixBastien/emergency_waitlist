@@ -4,11 +4,11 @@
 
 ### Connexion à la base de données MySQL
 
-i. Remplacez le mot de passe MySQL dans le fichier [global.php](public/global.php) par le vôtre.
+1. Remplacez le mot de passe MySQL dans le fichier [global.php](public/global.php) par le vôtre.
 
-ii. Dans votre terminal, à partir du répertoire racine du projet, tapez `cd db` tapez `mysql -u root -p` et entrez votre mot de passe pour vous connecter à MySQL.
+2. Dans votre terminal, à partir du répertoire racine du projet, tapez `cd db` tapez `mysql -u root -p` et entrez votre mot de passe pour vous connecter à MySQL.
 
-iii. Tapez `source ./schema.sql` et tapez `source ./seed.sql` pour créer la base de données.
+3. Tapez `source ./schema.sql` et tapez `source ./seed.sql` pour créer la base de données.
 
 ### Lancement du serveur PHP
 
