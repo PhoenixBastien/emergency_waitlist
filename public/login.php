@@ -1,26 +1,26 @@
 <?php
-// Start session
-session_start();
 // Import connection info
 require 'global.php';
-// Try and connect
+// Start session
+session_start();
+// Connect to database
 $mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
 if (mysqli_connect_errno()) {
-	// Display the error
-	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+    // Display the error
+    exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 // Check if the data exists
-if (!isset($_POST['username'], $_POST['password'])) {
-	// Could not get the data that should have been sent
-	exit('Please fill both the username and password fields!');
+if (!isset($_POST['username'], $_POST['password'], $_POST['role'])) {
+    // Could not get the data that should have been sent
+    exit('Please fill all fields!');
 }
 // Prepare our SQL
 if ($stmt = $mysqli->prepare('SELECT user_id, user_password, user_role FROM user WHERE username = ?')) {
-	// Bind parameters
-	$stmt->bind_param('s', $_POST['username']);
-	$stmt->execute();
-	// Store the result
-	$stmt->store_result();
+    // Bind parameters
+    $stmt->bind_param('s', $_POST['username']);
+    $stmt->execute();
+    // Store the result
+    $stmt->store_result();
     // Check if user exists in the database
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($id, $password, $role);
@@ -37,13 +37,12 @@ if ($stmt = $mysqli->prepare('SELECT user_id, user_password, user_role FROM user
             header("Location: {$role}_page.php");
         } else {
             // Incorrect credentials
-            echo 'Incorrect username, password or role!';
+            exit('Incorrect credentials!');
         }
     } else {
         // Incorrect credentials
-        echo 'Incorrect username, password or role!';
+        exit('Incorrect credentials!');
     }
-
-	$stmt->close();
+    $stmt->close();
 }
 ?>
