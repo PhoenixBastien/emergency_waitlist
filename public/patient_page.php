@@ -1,6 +1,6 @@
 <?php
 // Import connection info
-require 'global.php';
+require 'db_config.php';
 // Import database functions
 require 'db_functions.php';
 // Start session
@@ -11,7 +11,7 @@ if (!isset($_SESSION['loggedin'])) {
     exit;
 }
 // Connect to database
-$mysqli = mysqli_connect($host, $username, $password, $dbname, $port);
+$mysqli = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE, PORT);
 if (mysqli_connect_errno()) {
     // Display the error
     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
