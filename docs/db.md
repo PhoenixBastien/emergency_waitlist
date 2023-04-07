@@ -1,6 +1,6 @@
-# Emergency Waitlist Database
+# Base de données emergency_waitlist
 
-## user table
+## Tableau user
 
 |Field|Type|Null|Key|Default|Extra|
 |:----|:----|:----|:----|:----|:----|
