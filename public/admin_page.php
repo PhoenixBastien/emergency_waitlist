@@ -6,7 +6,7 @@ require 'db_functions.php';
 // Start session
 session_start();
 // If the user is not logged in redirect to the login page
-if (!isset($_SESSION['loggedin'])) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['role'] !== 'admin') {
     header('Location: index.html');
     exit;
 }

@@ -4,7 +4,7 @@ require 'db_config.php';
 // Start session
 session_start();
 // If the user is not logged in redirect to the login page
-if (!isset($_SESSION['loggedin'])) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['role'] !== 'admin') {
     header('Location: index.html');
     exit;
 }
@@ -39,15 +39,15 @@ if (mysqli_connect_errno()) {
             <div>
                 <form action="" method="post">
                     <label for="username"><strong>Patient's username:</strong></label>
-                    <input type="text" name="username" id="username" required>
+                    <input type="text" name="username" required>
                     <label for="password"><strong>Patient's password:</strong></label>
-                    <input type="password" name="password" id="password" required>
+                    <input type="password" name="password" required>
                     <label for="email"><strong>Patient's email address:</strong></label>
-                    <input type="email" name="email" id="email" required>
+                    <input type="email" name="email" required>
                     <label for="arrival"><strong>Patient's arrival time:</strong></label>
-                    <input type="datetime-local" name="arrival" id="arrival" required>
-                    <label for="severity"><strong>Patient's injury serverity:</strong></label>
-                    <input type="number" name="severity" name="severity" id="severity" min="1" max="5" required>
+                    <input type="datetime-local" name="arrival" required>
+                    <label for="severity"><strong>Patient's injury severity:</strong></label>
+                    <input type="number" name="severity" min="1" max="5" required>
                     <input type="submit" value="Submit">
                 </form>
                 <?php
