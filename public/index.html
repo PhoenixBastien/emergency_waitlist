@@ -15,13 +15,9 @@
         <div class="login">
             <h1>Login</h1>
             <form action="login.php" method="post">
-                <label for="username">
-                    <i class="fas fa-user"></i>
-                </label>
+                <label for="username"><i class="fas fa-user"></i></label>
                 <input type="text" name="username" placeholder="Username" required>
-                <label for="password">
-                    <i class="fas fa-lock"></i>
-                </label>
+                <label for="password"><i class="fas fa-lock"></i></label>
                 <input type="password" name="password" placeholder="Password" required>
                 <select name="role" placeholder="Role" required>
                     <option value="" selected disabled hidden>Select your role</option>
@@ -29,6 +25,9 @@
                     <option value="admin">Admin</option>
                 </select>
                 <input type="submit" value="Login">
+            </form>
+            <form action="signup.php">
+                <input type="submit" value="Sign Up">
             </form>
         </div>
     </body>

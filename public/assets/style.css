@@ -54,11 +54,12 @@ body {
 .login form select {
     border: 1px solid var(--accent);
     background-color: var(--main-light);
+    margin-bottom: 20px;
 }
 .login form input[type="submit"] {
     width: 100%;
     padding: 15px;
-    margin-top: 20px;
+
     background-color: var(--accent);
     border: 0;
     cursor: pointer;
